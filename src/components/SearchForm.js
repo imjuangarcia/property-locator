@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 
 class SearchForm extends React.Component {
   // State
@@ -34,6 +35,16 @@ class SearchForm extends React.Component {
         }, {
           name: 'Terrenos',
           value: 'terreno'
+        }],
+        places: [{
+          label: 'Escobar',
+          value: 'escobar'
+        }, {
+          label: 'Ing. Auschwitz',
+          value: 'maschwitz'
+        }, {
+          label: 'Pilar',
+          value: 'pilar'
         }]
       }
     }
@@ -79,6 +90,14 @@ class SearchForm extends React.Component {
               )
             }
           </select>
+        </div>
+        <div className="input-group">
+          <label htmlFor="places">Lugares</label>
+          <Select
+            options={this.state.searchOptions.places}
+            isMulti
+            name="places"
+          />
         </div>
         <div className="cta-group">
           <input type="submit" value="Buscar" />

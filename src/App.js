@@ -1,14 +1,15 @@
 import React from 'react';
 import SearchForm from './components/SearchForm';
+import PropertyList from './components/PropertyList';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchCriteria: {
-        property: 'casa',
-        operationType: 'alquiler',
-        places: ['escobar', 'maschwittz', 'pilar'],
+        property: '',
+        operationType: '',
+        places: [],
         pageNumber: 1,
       },
       properties: [],
@@ -16,11 +17,6 @@ class App extends React.Component {
   }
 
   // Lifecycle Methods
-  componentDidMount() {
-    // Get the properties
-    this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.places, this.state.searchCriteria.pageNumber);
-  }
-  
   componentDidUpdate() {
     console.log(this.state.properties);
   }
@@ -43,15 +39,21 @@ class App extends React.Component {
     // Get the values from the inputs
     const operationType = e.target.operationType.value;
     const property = e.target.property.value;
+    const places = [];
+    e.target.places.length ? e.target.places.forEach(place => places.push(place.value)) : places.push(e.target.places.value);
     
-    // And update the state
+    // Update the state
     this.setState({
       searchCriteria: {
         ...this.state.searchCriteria,
         operationType,
         property,
+        places
       }
-    })
+    });
+
+    // And call getProperties
+    this.getProperties(property, operationType, places, 1);
   }
 
   render() {
@@ -60,6 +62,9 @@ class App extends React.Component {
         <SearchForm
           searchCriteria={this.state.searchCriteria}
           handleSubmit={this.handleSearchCriteriaSubmit}
+        />
+        <PropertyList
+          properties={this.state.properties}
         />
       </main>
     );
