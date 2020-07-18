@@ -67,6 +67,7 @@ class SearchForm extends React.Component {
                   <option
                     key={key}
                     value={operationType.value}
+                    required
                   >
                     {operationType.name}
                   </option>
@@ -79,6 +80,7 @@ class SearchForm extends React.Component {
           <select
             name="property"
             defaultValue={this.props.searchCriteria.property}
+            required
           >
             {
               this.state.searchOptions.property.map(

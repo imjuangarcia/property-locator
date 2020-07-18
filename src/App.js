@@ -50,7 +50,14 @@ class App extends React.Component {
     const operationType = e.target.operationType.value;
     const property = e.target.property.value;
     const places = [];
-    e.target.places.length ? e.target.places.forEach(place => places.push(place.value)) : places.push(e.target.places.value);
+
+    // if there are no places, we return
+    if(!e.target.places.value) {
+      return
+    } else {
+      // We check if we have one or more
+      e.target.places.length ? e.target.places.forEach(place => places.push(place.value)) : places.push(e.target.places.value);
+    }
     
     // Update the state
     this.setState({
