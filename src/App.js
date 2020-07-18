@@ -51,12 +51,18 @@ class App extends React.Component {
     const property = e.target.property.value;
     const places = [];
 
-    // if there are no places, we return
-    if(!e.target.places.value) {
-      return
-    } else {
-      // We check if we have one or more
-      e.target.places.length ? e.target.places.forEach(place => places.push(place.value)) : places.push(e.target.places.value);
+    // If we have more than one, we iterate over the values
+    if(e.target.places.length > 1) {
+      e.target.places.forEach(place => places.push(place.value))
+    }
+    // If we have only one, we get its value
+    else if (e.target.places.value !== '') {
+      places.push(e.target.places.value);
+    } 
+    // If none of the above are met, that means the field is empty, thus we alert the user
+    else {
+      alert('Elegí un lugar, piscui');
+      return;
     }
     
     // Update the state
