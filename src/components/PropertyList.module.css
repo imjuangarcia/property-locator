@@ -1,0 +1,59 @@
+.properties {
+  background-color: hsl(0,0%,90%);
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.propertyList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 1rem;
+}
+
+.propertyList li {
+  background-color: hsl(0,0%,100%);
+  border-radius: .5rem;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.imageContainer img {
+  width: 100%;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.imageContainer span {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  background-color: hsl(0,0%,80%);
+  padding: .25rem;
+  border-radius: .25rem;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: hsl(0,0%,20%);
+}
+
+.propertyList .textContainer {
+  padding: 1rem;
+}
+
+.textContainer h2 {
+  color: hsl(0,0%,20%);
+  font-size: 1.25rem;
+  word-break: break-word;
+}
+
+.textContainer p {
+  color: hsl(0,0%,40%);
+  line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}

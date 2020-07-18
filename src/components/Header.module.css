@@ -1,4 +1,7 @@
+.header {
+  padding: 1rem;
+}
+
 .header h1 {
-  margin-bottom: 1rem;
   color: hsl(0,0%,20%);
 }

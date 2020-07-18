@@ -1,3 +1,7 @@
+.form {
+  padding: 0 1rem;
+}
+
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -5,9 +9,9 @@
 }
 
 .inputGroup label {
+  color: hsl(0,0%,60%);
   font-size: .6rem;
   font-weight: 700;
-  color: hsl(0,0%,60%);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: .25rem;
