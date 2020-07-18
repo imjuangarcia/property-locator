@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropertyItem from './PropertyItem';
+import EmptyState from './EmptyState';
 
 import styles from './PropertyList.module.css';
 
@@ -10,13 +11,15 @@ class PropertyList extends React.Component {
       <section className={styles.properties}>
         <ul className={styles.propertyList}>
           {
-            this.props.properties.map(
-              (property, key) =>
-              <PropertyItem
-                key={key}
-                property={property}
-              />
-            )
+            this.props.properties.length ?
+              this.props.properties.map(
+                (property, key) =>
+                <PropertyItem
+                  key={key}
+                  property={property}
+                />
+              ) :
+              <EmptyState />
           }
         </ul>
       </section>

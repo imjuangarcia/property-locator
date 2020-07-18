@@ -1,0 +1,25 @@
+.empty {
+  padding: 2rem;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty i {
+  color: hsl(0,0%,70%);
+  margin-bottom: 1rem;
+}
+
+.empty h3 {
+  font-size: 1.5rem;
+  color: hsl(0,0%,40%);
+}
+
+.empty p {
+  font-size: .9rem;
+  margin-top: .5rem;
+  color: hsl(0,0%,60%);
+}
