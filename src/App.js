@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import PropertyList from './components/PropertyList';
 
@@ -59,6 +61,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="App">
+        <Header />
         <SearchForm
           searchCriteria={this.state.searchCriteria}
           handleSubmit={this.handleSearchCriteriaSubmit}

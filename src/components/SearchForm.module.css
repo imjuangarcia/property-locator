@@ -1,0 +1,40 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  font-size: .6rem;
+  font-weight: 700;
+  color: hsl(0,0%,60%);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: .25rem;
+}
+
+.inputGroup select {
+  height: 38px;
+  background-color: hsl(0,0%,100%);
+  border: 1px solid hsl(0,0%,80%);
+  border-radius: .25rem;
+}
+
+.ctaGroup input {
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: #2684FF;
+  border: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: hsl(0,0%,100%);
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.ctaGroup input:hover {
+  opacity: .8;
+}

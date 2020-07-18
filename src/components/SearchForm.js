@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 
+import styles from './SearchForm.module.css';
+
 class SearchForm extends React.Component {
   // State
   constructor(props) {
@@ -52,8 +54,8 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit}>
-        <div className="input-group">
+      <form onSubmit={this.props.handleSubmit} className={styles.form}>
+        <div className={styles.inputGroup}>
           <label htmlFor="operationType">Tipo de Operaci&oacute;n</label>
           <select
             name="operationType"
@@ -72,7 +74,7 @@ class SearchForm extends React.Component {
             }
           </select>
         </div>
-        <div className="input-group">
+        <div className={styles.inputGroup}>
           <label htmlFor="property">Propiedad</label>
           <select
             name="property"
@@ -91,7 +93,7 @@ class SearchForm extends React.Component {
             }
           </select>
         </div>
-        <div className="input-group">
+        <div className={styles.inputGroup}>
           <label htmlFor="places">Lugares</label>
           <Select
             options={this.state.searchOptions.places}
@@ -99,7 +101,7 @@ class SearchForm extends React.Component {
             name="places"
           />
         </div>
-        <div className="cta-group">
+        <div className={styles.ctaGroup}>
           <input type="submit" value="Buscar" />
         </div>
       </form>
