@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Loading from './components/Loading';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import PropertyList from './components/PropertyList';
@@ -15,6 +16,7 @@ class App extends React.Component {
         pageNumber: 1,
       },
       properties: [],
+      loading: false,
     };
   }
 
@@ -25,12 +27,18 @@ class App extends React.Component {
 
   // Function to fetch the properties and update state
   getProperties = async (property, operationType, places, page) => {
+    // Set the loading state
+    this.setState({
+      loading: true,
+    });
+
     const response = await fetch(`https://www.properati.com.ar/${property}/${operationType}/en:${places}/${page}/?format=json`);
     const json = await response.json();
     
     // Update the properties state
     this.setState({
-      properties: json
+      properties: json,
+      loading: false,
     });
   }
 
@@ -61,6 +69,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="App">
+        {this.state.loading ? <Loading /> : ''}
         <Header />
         <SearchForm
           searchCriteria={this.state.searchCriteria}
