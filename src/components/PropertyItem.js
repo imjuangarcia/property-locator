@@ -14,7 +14,29 @@ class PropertyItem extends React.Component {
           <div className={styles.textContainer}>
             <h2>{this.props.property.title}</h2>
             <p>{this.props.property.description}</p>
+            <ul className={styles.features}>
+              {this.props.property.bedrooms || this.props.property.rooms ?
+                <li>
+                  <i className="fas fa-fw fa-bed"></i>
+                  {this.props.property.bedrooms || this.props.property.rooms}
+                </li> : ''
+              }
+              {this.props.property.bathrooms ?
+                <li>
+                  <i className="fas fa-fw fa-toilet"></i>
+                  {this.props.property.bathrooms}
+                </li> : ''
+              }
+            </ul>
           </div>
+        </a>
+        <a
+          href={`https://www.google.com/maps?q=loc:${this.props.property.lat},${this.props.property.lon}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.mapButton}
+        >
+          Ver ubicaci&oacute;n en el mapa
         </a>
       </li>
     );
