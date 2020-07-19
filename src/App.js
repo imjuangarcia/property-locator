@@ -11,8 +11,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchCriteria: {
-        property: '',
-        operationType: '',
+        property: 'casa',
+        operationType: 'alquiler',
+        ordering: 'ord:p-a',
         places: [],
       },
       pageNumber: 1,
@@ -27,14 +28,14 @@ class App extends React.Component {
   }
 
   // Function to fetch the properties and update state
-  getProperties = async (property, operationType, places, page, status) => {
+  getProperties = async (property, operationType, ordering, places, page, status) => {
     // Set the loading state
     this.setState({
       loading: true,
     });
 
     // Ping the API
-    const response = await fetch(`https://www.properati.com.ar/${property}/${operationType}/en:${places}/${page}/?format=json`);
+    const response = await fetch(`https://www.properati.com.ar/${property}/${operationType}/${ordering}_en:${places}/${page}/?format=json`);
     const json = await response.json();
 
     // If there aren't elements on the array, we return the function
@@ -81,6 +82,7 @@ class App extends React.Component {
     // Get the values from the inputs
     const operationType = e.target.operationType.value;
     const property = e.target.property.value;
+    const ordering = e.target.ordering.value;
     const places = [];
 
     // If we have more than one, we iterate over the values
@@ -110,7 +112,7 @@ class App extends React.Component {
     });
 
     // And call getProperties
-    this.getProperties(property, operationType, places, 1, 1);
+    this.getProperties(property, operationType, ordering, places, 1, 1);
   }
 
   // To load more results after a search has been performed
@@ -123,7 +125,7 @@ class App extends React.Component {
     });
 
     // And call the getProperties method
-    this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.places, this.state.pageNumber + 1, 2);
+    this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.ordering, this.state.searchCriteria.places, this.state.pageNumber + 1, 2);
   }
 
   render() {

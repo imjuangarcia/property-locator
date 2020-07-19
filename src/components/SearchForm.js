@@ -45,8 +45,21 @@ class SearchForm extends React.Component {
           label: 'Ing. Auschwitz',
           value: 'maschwitz'
         }, {
-          label: 'Pilar',
-          value: 'pilar'
+          label: 'Zona Norte',
+          value: 'bs-as-g-b-a-zona-norte'
+        }],
+        ordering: [{
+          name: 'Más Caras',
+          value: 'ord:p-d',
+        }, {
+          name: 'Más Baratas',
+          value: 'ord:p-a',
+        }, {
+          name: 'Fecha',
+          value: 'ord:f-d',
+        }, {
+          name: 'Relevancia',
+          value: 'ord:r-d',
         }]
       }
     }
@@ -90,6 +103,26 @@ class SearchForm extends React.Component {
                     value={property.value}
                   >
                     {property.name}
+                  </option>
+              )
+            }
+          </select>
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor="ordering">Ordenar por</label>
+          <select
+            name="ordering"
+            defaultValue={this.props.searchCriteria.ordering}
+            required
+          >
+            {
+              this.state.searchOptions.ordering.map(
+                (ordering, key) => 
+                  <option
+                    key={key}
+                    value={ordering.value}
+                  >
+                    {ordering.name}
                   </option>
               )
             }
