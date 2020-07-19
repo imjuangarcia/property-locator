@@ -140,9 +140,7 @@ class App extends React.Component {
         <PropertyList
           properties={this.state.properties}
         />
-        <Pagination
-          loadMoreResults={this.loadMoreResults}
-        />
+        {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
       </main>
     );
   }
