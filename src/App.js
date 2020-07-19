@@ -4,6 +4,7 @@ import Loading from './components/Loading';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import PropertyList from './components/PropertyList';
+import Pagination from './components/Pagination';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class App extends React.Component {
         property: '',
         operationType: '',
         places: [],
-        pageNumber: 1,
       },
+      pageNumber: 1,
       properties: [],
       loading: false,
     };
@@ -26,20 +27,51 @@ class App extends React.Component {
   }
 
   // Function to fetch the properties and update state
-  getProperties = async (property, operationType, places, page) => {
+  getProperties = async (property, operationType, places, page, status) => {
     // Set the loading state
     this.setState({
       loading: true,
     });
 
+    // Ping the API
     const response = await fetch(`https://www.properati.com.ar/${property}/${operationType}/en:${places}/${page}/?format=json`);
     const json = await response.json();
-    
-    // Update the properties state
-    this.setState({
-      properties: json,
-      loading: false,
-    });
+
+    // If there aren't elements on the array, we return the function
+    if(json.length === 0) {
+
+      // Remove the loading state
+      this.setState({
+        loading: false,
+      });
+
+      // Alert the user
+      alert('No hay más resultados');
+
+      // Exit the fn
+      return;
+    }
+
+    // Check the type of operation (status). 1 === new, 2 === update
+    if(status === 1) {
+      // We're making a new search, so we drop the existing properties, and add the new ones
+      this.setState({
+        properties: json,
+        loading: false,
+      });
+    } else {
+      // We're updating the list via the pagination, thus we take a copy of the existing properties on state
+      const currentProperties = this.state.properties;
+
+      // We push the new items
+      json.forEach(item => currentProperties.push(item));
+
+      // And set the new state
+      this.setState({
+        properties: currentProperties,
+        loading: false,
+      });
+    }
   }
 
   // Function to handle the search form submission and update the state
@@ -72,11 +104,26 @@ class App extends React.Component {
         operationType,
         property,
         places
-      }
+      },
+      // We reset the counter because it's a new search
+      pageNumber: 1,
     });
 
     // And call getProperties
-    this.getProperties(property, operationType, places, 1);
+    this.getProperties(property, operationType, places, 1, 1);
+  }
+
+  // To load more results after a search has been performed
+  loadMoreResults = () => {
+    
+    // Update the page number
+    this.setState({
+      ...this.state,
+      pageNumber: this.state.pageNumber + 1,
+    });
+
+    // And call the getProperties method
+    this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.places, this.state.pageNumber + 1, 2);
   }
 
   render() {
@@ -90,6 +137,9 @@ class App extends React.Component {
         />
         <PropertyList
           properties={this.state.properties}
+        />
+        <Pagination
+          loadMoreResults={this.loadMoreResults}
         />
       </main>
     );

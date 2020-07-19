@@ -1,0 +1,23 @@
+.paginationContainer {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.paginationContainer button {
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: hsl(0,0%,90%);
+  border: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: #2684FF;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.paginationContainer button:hover {
+  opacity: .8;
+}
