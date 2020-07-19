@@ -8,7 +8,8 @@ class PropertyItem extends React.Component {
       <li className={styles.propertyItem}>
         <a href={ this.props.property.url } target="_blank" rel="noopener noreferrer">
           <div className={styles.imageContainer}>
-            <span>{this.props.property.currency_id} ${this.props.property.price}</span>
+            <span className={styles.price}>{this.props.property.currency_id} ${this.props.property.price}</span>
+            {this.props.property.expenses ? <span className={styles.expenses}>{this.props.property.expenses}</span> : ''}
             <img src={this.props.property.main_image} alt={this.props.property.title} loading="lazy" />
           </div>
           <div className={styles.textContainer}>

@@ -16,8 +16,6 @@
 
 .imageContainer span {
   position: absolute;
-  top: .5rem;
-  left: .5rem;
   background-color: hsl(0,0%,80%);
   padding: .25rem;
   border-radius: .25rem;
@@ -26,6 +24,16 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: hsl(0,0%,20%);
+}
+
+.imageContainer .price {
+  top: .5rem;
+  left: .5rem;
+}
+
+.imageContainer .expenses {
+  top: .5rem;
+  right: .5rem;
 }
 
 .textContainer {
