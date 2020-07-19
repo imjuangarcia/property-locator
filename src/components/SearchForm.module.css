@@ -1,11 +1,15 @@
 .form {
   padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin: 1rem .5rem;
+  flex: 40%;
+  box-sizing: border-box;
 }
 
 .inputGroup label {
@@ -22,6 +26,11 @@
   background-color: hsl(0,0%,100%);
   border: 1px solid hsl(0,0%,80%);
   border-radius: .25rem;
+}
+
+.ctaGroup {
+  flex: 100%;
+  margin: .5rem;
 }
 
 .ctaGroup input {
