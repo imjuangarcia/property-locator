@@ -16,8 +16,14 @@ class App extends React.Component {
         ordering: 'ord:p-a',
         places: [],
       },
+      filters: {
+        ambients: '',
+        coveredSurface: '',
+        totalSurface: '',
+      },
       pageNumber: 1,
       properties: [],
+      filteredProperties: [],
       loading: false,
     };
   }
@@ -58,8 +64,10 @@ class App extends React.Component {
       // We're making a new search, so we drop the existing properties, and add the new ones
       this.setState({
         properties: json,
+        filteredProperties: [],
         loading: false,
       });
+
     } else {
       // We're updating the list via the pagination, thus we take a copy of the existing properties on state
       const currentProperties = this.state.properties;
@@ -67,11 +75,14 @@ class App extends React.Component {
       // We push the new items
       json.forEach(item => currentProperties.push(item));
 
-      // And set the new state
+      // Set the new state
       this.setState({
         properties: currentProperties,
         loading: false,
       });
+
+      // And filter the results
+      this.filterProperties(this.state.filters.ambients);
     }
   }
 
@@ -115,6 +126,28 @@ class App extends React.Component {
     this.getProperties(property, operationType, ordering, places, 1, 1);
   }
 
+  // To handle the filters form
+  handleFiltersForm = (e) => {
+    e.preventDefault();
+
+    // Get the input values
+    const ambients = e.target.ambients.value;
+    const coveredSurface = e.target.coveredSurface.value;
+    const totalSurface = e.target.totalSurface.value;
+
+    // Set them to state
+    this.setState({
+      filters: {
+        ambients,
+        coveredSurface,
+        totalSurface,
+      }
+    });
+
+    // And filter the properties using this criteria
+    this.filterProperties(ambients, coveredSurface, totalSurface);
+  }
+
   // To load more results after a search has been performed
   loadMoreResults = () => {
     
@@ -128,6 +161,11 @@ class App extends React.Component {
     this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.ordering, this.state.searchCriteria.places, this.state.pageNumber + 1, 2);
   }
 
+  // To filter the properties
+  filterProperties = (ambients, coveredSurface, totalSurface) => {
+    console.log('test');
+  }
+
   render() {
     return (
       <main className="App">
@@ -138,7 +176,8 @@ class App extends React.Component {
           handleSubmit={this.handleSearchCriteriaSubmit}
         />
         <PropertyList
-          properties={this.state.properties}
+          properties={this.state.filteredProperties.length ? this.state.filteredProperties : this.state.properties}
+          handleFiltersForm={this.handleFiltersForm}
         />
         {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
       </main>

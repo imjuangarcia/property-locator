@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropertyItem from './PropertyItem';
+import PropertyFilters from './PropertyFilters';
 import EmptyState from './EmptyState';
 
 import styles from './PropertyList.module.css';
@@ -9,6 +10,13 @@ class PropertyList extends React.Component {
   render() {
     return (
       <section className={styles.properties}>
+        {
+          this.props.properties.length ?
+            <PropertyFilters
+              handleFiltersForm={this.props.handleFiltersForm}
+            />
+            : ''
+        }
         <ul className={styles.propertyList}>
           {
             this.props.properties.length ?
