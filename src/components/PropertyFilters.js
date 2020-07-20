@@ -13,7 +13,7 @@ class PropertyFilters extends React.Component {
               name="ambients"
               required
             >
-              <option value="">Todos</option>
+              <option value=" ">Todos</option>
               <option value="1">1 ambiente</option>
               <option value="2">2 ambientes</option>
               <option value="3">3 ambientes</option>
@@ -27,7 +27,7 @@ class PropertyFilters extends React.Component {
               name="coveredSurface"
               required
             >
-              <option value="">Todos</option>
+              <option value=" ">Todos</option>
               <option value="0-49">Hasta 49</option>
               <option value="50-99">50 - 99</option>
               <option value="100-149">100 - 149</option>
@@ -41,7 +41,7 @@ class PropertyFilters extends React.Component {
               name="totalSurface"
               required
             >
-              <option value="">Todos</option>
+              <option value=" ">Todos</option>
               <option value="0-49">Hasta 49</option>
               <option value="50-99">50 - 99</option>
               <option value="100-149">100 - 149</option>

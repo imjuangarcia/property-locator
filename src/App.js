@@ -64,7 +64,7 @@ class App extends React.Component {
       // We're making a new search, so we drop the existing properties, and add the new ones
       this.setState({
         properties: json,
-        filteredProperties: [],
+        filteredProperties: json,
         loading: false,
       });
 
@@ -82,7 +82,7 @@ class App extends React.Component {
       });
 
       // And filter the results
-      this.filterProperties(this.state.filters.ambients);
+      this.filterProperties(this.state.filters.ambients, this.state.filters.coveredSurface, this.state.filters.totalSurface);
     }
   }
 
@@ -163,7 +163,58 @@ class App extends React.Component {
 
   // To filter the properties
   filterProperties = (ambients, coveredSurface, totalSurface) => {
-    console.log('test');
+
+    // Filter by ambients
+    const filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
+    
+    // Filter by covered surface
+    let filteredByCoveredSurface;
+    switch(coveredSurface) {
+      case '0-49':
+        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 0 && property.surface_covered < 49);
+        break;
+      case '50-99':
+        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 50 && property.surface_covered < 99);
+        break;
+      case '100-149':
+        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 100 && property.surface_covered < 149);
+        break;
+      case '150-199':
+        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 150 && property.surface_covered < 199);
+        break;
+      case '200-+':
+        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 200);
+        break;
+      default:
+        filteredByCoveredSurface = filteredByAmbient;
+    }
+    
+    // Filter by total surface
+    let filteredByTotalSurface;
+    switch(totalSurface) {
+      case '0-49':
+        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 0 && property.surface_total < 49);
+        break;
+      case '50-99':
+        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 50 && property.surface_total < 99);
+        break;
+      case '100-149':
+        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 100 && property.surface_total < 149);
+        break;
+      case '150-199':
+        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 150 && property.surface_total < 199);
+        break;
+      case '200-+':
+        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 200);
+        break;
+      default:
+        filteredByTotalSurface = filteredByCoveredSurface;
+    }
+
+    // After all the filtering, push the data to state
+    this.setState({
+      filteredProperties: filteredByTotalSurface,
+    });
   }
 
   render() {
@@ -176,7 +227,7 @@ class App extends React.Component {
           handleSubmit={this.handleSearchCriteriaSubmit}
         />
         <PropertyList
-          properties={this.state.filteredProperties.length ? this.state.filteredProperties : this.state.properties}
+          properties={this.state.filteredProperties}
           handleFiltersForm={this.handleFiltersForm}
         />
         {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
