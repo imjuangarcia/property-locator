@@ -1,0 +1,63 @@
+.propertyFilters {
+  padding: 1rem 0;
+}
+
+.propertyFilters form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 40%;
+  box-sizing: border-box;
+}
+
+.inputGroup label {
+  color: hsl(0,0%,60%);
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: .25rem;
+}
+
+.inputGroup select {
+  height: 38px;
+  background-color: hsl(0,0%,100%);
+  border: 1px solid hsl(0,0%,80%);
+  border-radius: .25rem;
+}
+
+.ctaGroup {
+  align-self: flex-end;
+}
+
+.ctaGroup input {
+  padding: 0 1rem;
+  border-radius: .25rem;
+  border: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .75rem;
+  font-weight: 700;
+  background-color: hsl(0,0%,70%);
+  color: white;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  height: 38px;
+  width: 100%;
+}
+
+.ctaGroup input:hover {
+  opacity: .8;
+}
+
+.propertyFilters hr {
+  margin: 2rem 0 1rem 0;
+  border: none;
+  border-bottom: 1px solid hsl(0,0%, 70%);
+}

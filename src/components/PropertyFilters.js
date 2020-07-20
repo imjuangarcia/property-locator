@@ -7,7 +7,7 @@ class PropertyFilters extends React.Component {
     return (
       <div className={styles.propertyFilters}>
         <form onSubmit={this.props.handleFiltersForm}>
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label htmlFor="ambients">Ambientes:</label>
             <select
               name="ambients"
@@ -21,7 +21,7 @@ class PropertyFilters extends React.Component {
               <option value="5">5 ambientes o m&aacute;s</option>
             </select>
           </div>
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label htmlFor="coveredSurface">Superficie Cubierta:</label>
             <select
               name="coveredSurface"
@@ -35,7 +35,7 @@ class PropertyFilters extends React.Component {
               <option value="200-+">M&aacute;s de 200</option>
             </select>
           </div>
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label htmlFor="totalSurface">Superficie Total:</label>
             <select
               name="totalSurface"
@@ -49,10 +49,11 @@ class PropertyFilters extends React.Component {
               <option value="200-+">M&aacute;s de 200</option>
             </select>
           </div>
-          <div className="cta-group">
+          <div className={styles.ctaGroup}>
             <input type="submit" value="filtrar" />
           </div>
         </form>
+        <hr />
       </div>
     );
   }
