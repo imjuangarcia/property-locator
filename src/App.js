@@ -3,6 +3,7 @@ import React from 'react';
 import Loading from './components/Loading';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
+import Map from './components/Map';
 import PropertyList from './components/PropertyList';
 import Pagination from './components/Pagination';
 
@@ -247,13 +248,22 @@ class App extends React.Component {
           searchCriteria={this.state.searchCriteria}
           handleSubmit={this.handleSearchCriteriaSubmit}
         />
-        {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
         <PropertyList
           properties={this.state.filteredProperties}
           handleFiltersForm={this.handleFiltersForm}
           handleSearch={this.handleSearch}
           filters={this.state.filters}
-        />
+          />
+        {this.state.properties.length > 0 ?
+          <React.Fragment>
+            <Pagination loadMoreResults={this.loadMoreResults} />
+            <Map
+              properties={this.state.filteredProperties}
+            />
+          </React.Fragment>
+          : ''
+        }
+        
       </main>
     );
   }
