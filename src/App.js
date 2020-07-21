@@ -165,7 +165,12 @@ class App extends React.Component {
   filterProperties = (ambients, coveredSurface, totalSurface) => {
 
     // Filter by ambients
-    const filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
+    let filteredByAmbient;
+    if(ambients === ' ') {
+      filteredByAmbient = this.state.properties;
+    } else {
+      filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
+    }
     
     // Filter by covered surface
     let filteredByCoveredSurface;
