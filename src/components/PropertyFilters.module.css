@@ -13,6 +13,7 @@
   flex-direction: column;
   flex: 40%;
   box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
 .inputGroup label {
@@ -24,7 +25,7 @@
   margin-bottom: .25rem;
 }
 
-.inputGroup select {
+.inputGroup select, .inputGroup input {
   height: 38px;
   background-color: hsl(0,0%,100%);
   border: 1px solid hsl(0,0%,80%);
@@ -33,6 +34,7 @@
 
 .ctaGroup {
   align-self: flex-end;
+  margin-bottom: 1rem;
 }
 
 .ctaGroup input {
@@ -57,7 +59,7 @@
 }
 
 .propertyFilters hr {
-  margin: 2rem 0 1rem 0;
+  margin: 1rem 0;
   border: none;
   border-bottom: 1px solid hsl(0,0%, 70%);
 }
