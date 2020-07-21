@@ -247,13 +247,13 @@ class App extends React.Component {
           searchCriteria={this.state.searchCriteria}
           handleSubmit={this.handleSearchCriteriaSubmit}
         />
+        {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
         <PropertyList
           properties={this.state.filteredProperties}
           handleFiltersForm={this.handleFiltersForm}
           handleSearch={this.handleSearch}
           filters={this.state.filters}
         />
-        {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
       </main>
     );
   }
