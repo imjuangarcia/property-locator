@@ -17,9 +17,9 @@ class App extends React.Component {
         places: [],
       },
       filters: {
-        ambients: '',
-        coveredSurface: '',
-        totalSurface: '',
+        ambients: 'all',
+        coveredSurface: 'all',
+        totalSurface: 'all',
       },
       pageNumber: 1,
       properties: [],
@@ -166,11 +166,7 @@ class App extends React.Component {
 
     // Filter by ambients
     let filteredByAmbient;
-    if(ambients === ' ') {
-      filteredByAmbient = this.state.properties;
-    } else {
-      filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
-    }
+    ambients === 'all' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
     
     // Filter by covered surface
     let filteredByCoveredSurface;
@@ -234,6 +230,7 @@ class App extends React.Component {
         <PropertyList
           properties={this.state.filteredProperties}
           handleFiltersForm={this.handleFiltersForm}
+          filters={this.state.filters}
         />
         {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}
       </main>

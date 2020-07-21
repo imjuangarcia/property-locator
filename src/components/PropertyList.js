@@ -13,6 +13,7 @@ class PropertyList extends React.Component {
         {
           this.props.properties.length ?
             <PropertyFilters
+              filters={this.props.filters}
               handleFiltersForm={this.props.handleFiltersForm}
             />
             : ''

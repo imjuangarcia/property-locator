@@ -12,8 +12,9 @@ class PropertyFilters extends React.Component {
             <select
               name="ambients"
               required
+              defaultValue={this.props.filters.ambients}
             >
-              <option value=" ">Todos</option>
+              <option value="all">Todos</option>
               <option value="1">1 ambiente</option>
               <option value="2">2 ambientes</option>
               <option value="3">3 ambientes</option>
@@ -26,8 +27,9 @@ class PropertyFilters extends React.Component {
             <select
               name="coveredSurface"
               required
+              defaultValue={this.props.filters.coveredSurface}
             >
-              <option value=" ">Todos</option>
+              <option value="all">Todos</option>
               <option value="0-49">Hasta 49</option>
               <option value="50-99">50 - 99</option>
               <option value="100-149">100 - 149</option>
@@ -40,8 +42,9 @@ class PropertyFilters extends React.Component {
             <select
               name="totalSurface"
               required
+              defaultValue={this.props.filters.totalSurface}
             >
-              <option value=" ">Todos</option>
+              <option value="all">Todos</option>
               <option value="0-49">Hasta 49</option>
               <option value="50-99">50 - 99</option>
               <option value="100-149">100 - 149</option>
@@ -53,6 +56,13 @@ class PropertyFilters extends React.Component {
             <input type="submit" value="filtrar" />
           </div>
         </form>
+        <div className={styles.inputGroup}>
+          <label htmlFor="search">Buscar:</label>
+          <input
+            type="text"
+            placeholder="Ej.: Arboleda Añeja, Vecinos que no te espían, etc"
+          />
+        </div>
         <hr />
       </div>
     );
