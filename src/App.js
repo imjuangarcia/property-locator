@@ -5,7 +5,6 @@ import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import Map from './components/Map';
 import PropertyList from './components/PropertyList';
-import Pagination from './components/Pagination';
 
 class App extends React.Component {
   constructor(props) {
@@ -167,7 +166,9 @@ class App extends React.Component {
   }
 
   // To load more results after a search has been performed
-  loadMoreResults = () => {
+  handleLoadMore = (e) => {
+    // Prevent the form from being submitted
+    e.preventDefault();
     
     // Update the page number
     this.setState({
@@ -247,6 +248,8 @@ class App extends React.Component {
         <SearchForm
           searchCriteria={this.state.searchCriteria}
           handleSubmit={this.handleSearchCriteriaSubmit}
+          handleLoadMore={this.handleLoadMore}
+          properties={this.state.filteredProperties}
         />
         <PropertyList
           properties={this.state.filteredProperties}
@@ -255,15 +258,11 @@ class App extends React.Component {
           filters={this.state.filters}
           />
         {this.state.properties.length > 0 ?
-          <React.Fragment>
-            <Pagination loadMoreResults={this.loadMoreResults} />
             <Map
               properties={this.state.filteredProperties}
             />
-          </React.Fragment>
           : ''
         }
-        
       </main>
     );
   }
