@@ -21,6 +21,7 @@ class App extends React.Component {
         coveredSurface: 'all',
         totalSurface: 'all',
       },
+      searchTerm: '',
       pageNumber: 1,
       properties: [],
       filteredProperties: [],
@@ -28,7 +29,6 @@ class App extends React.Component {
     };
   }
 
-  // Lifecycle Methods
   componentDidUpdate() {
     console.log(this.state.properties);
   }
@@ -82,7 +82,7 @@ class App extends React.Component {
       });
 
       // And filter the results
-      this.filterProperties(this.state.filters.ambients, this.state.filters.coveredSurface, this.state.filters.totalSurface);
+      this.filterProperties(this.state.filters.ambients, this.state.filters.coveredSurface, this.state.filters.totalSurface, this.state.searchTerm);
     }
   }
 
@@ -129,11 +129,12 @@ class App extends React.Component {
   // To handle the filters form
   handleFiltersForm = (e) => {
     e.preventDefault();
+    const inputs = e.currentTarget.parentElement.parentElement;
 
     // Get the input values
-    const ambients = e.target.ambients.value;
-    const coveredSurface = e.target.coveredSurface.value;
-    const totalSurface = e.target.totalSurface.value;
+    const ambients = inputs[0].value;
+    const coveredSurface = inputs[1].value;
+    const totalSurface = inputs[2].value;
 
     // Set them to state
     this.setState({
@@ -145,7 +146,23 @@ class App extends React.Component {
     });
 
     // And filter the properties using this criteria
-    this.filterProperties(ambients, coveredSurface, totalSurface);
+    this.filterProperties(ambients, coveredSurface, totalSurface, this.state.searchTerm);
+  }
+
+  // To handle the search functionality
+  handleSearch = (e) => {
+    e.preventDefault();
+
+    // Get the value from the input
+    const searchTerm = e.target.value;
+
+    // Set the value on state
+    this.setState({
+      searchTerm,
+    });
+
+    // Call the filter properties method
+    this.filterProperties(this.state.filters.ambients, this.state.filters.coveredSurface, this.state.filters.totalSurface, searchTerm);
   }
 
   // To load more results after a search has been performed
@@ -162,7 +179,7 @@ class App extends React.Component {
   }
 
   // To filter the properties
-  filterProperties = (ambients, coveredSurface, totalSurface) => {
+  filterProperties = (ambients, coveredSurface, totalSurface, searchTerm) => {
 
     // Filter by ambients
     let filteredByAmbient;
@@ -212,9 +229,12 @@ class App extends React.Component {
         filteredByTotalSurface = filteredByCoveredSurface;
     }
 
+    // Filter by word
+    const filteredBySearchTerm = filteredByTotalSurface.filter(property => property.description.toLowerCase().includes(searchTerm) || property.title.toLowerCase().includes(searchTerm));
+
     // After all the filtering, push the data to state
     this.setState({
-      filteredProperties: filteredByTotalSurface,
+      filteredProperties: filteredBySearchTerm,
     });
   }
 
@@ -230,6 +250,7 @@ class App extends React.Component {
         <PropertyList
           properties={this.state.filteredProperties}
           handleFiltersForm={this.handleFiltersForm}
+          handleSearch={this.handleSearch}
           filters={this.state.filters}
         />
         {this.state.properties.length > 0 ? <Pagination loadMoreResults={this.loadMoreResults} /> : ''}

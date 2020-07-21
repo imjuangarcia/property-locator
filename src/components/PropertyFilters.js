@@ -6,13 +6,14 @@ class PropertyFilters extends React.Component {
   render() {
     return (
       <div className={styles.propertyFilters}>
-        <form onSubmit={this.props.handleFiltersForm}>
+        <form>
           <div className={styles.inputGroup}>
             <label htmlFor="ambients">Ambientes:</label>
             <select
               name="ambients"
               required
               defaultValue={this.props.filters.ambients}
+              onChange={this.props.handleFiltersForm}
             >
               <option value="all">Todos</option>
               <option value="1">1 ambiente</option>
@@ -28,6 +29,7 @@ class PropertyFilters extends React.Component {
               name="coveredSurface"
               required
               defaultValue={this.props.filters.coveredSurface}
+              onChange={this.props.handleFiltersForm}
             >
               <option value="all">Todos</option>
               <option value="0-49">Hasta 49</option>
@@ -43,6 +45,7 @@ class PropertyFilters extends React.Component {
               name="totalSurface"
               required
               defaultValue={this.props.filters.totalSurface}
+              onChange={this.props.handleFiltersForm}
             >
               <option value="all">Todos</option>
               <option value="0-49">Hasta 49</option>
@@ -52,17 +55,15 @@ class PropertyFilters extends React.Component {
               <option value="200-+">M&aacute;s de 200</option>
             </select>
           </div>
-          <div className={styles.ctaGroup}>
-            <input type="submit" value="filtrar" />
+          <div className={styles.inputGroup}>
+            <label htmlFor="search">Buscar:</label>
+            <input
+              type="text"
+              placeholder="Ej.: Arboleda Añeja, Vecinos que no te espían, etc"
+              onChange={this.props.handleSearch}
+            />
           </div>
         </form>
-        <div className={styles.inputGroup}>
-          <label htmlFor="search">Buscar:</label>
-          <input
-            type="text"
-            placeholder="Ej.: Arboleda Añeja, Vecinos que no te espían, etc"
-          />
-        </div>
         <hr />
       </div>
     );

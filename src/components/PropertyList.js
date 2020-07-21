@@ -10,14 +10,11 @@ class PropertyList extends React.Component {
   render() {
     return (
       <section className={styles.properties}>
-        {
-          this.props.properties.length ?
-            <PropertyFilters
-              filters={this.props.filters}
-              handleFiltersForm={this.props.handleFiltersForm}
-            />
-            : ''
-        }
+        <PropertyFilters
+          filters={this.props.filters}
+          handleFiltersForm={this.props.handleFiltersForm}
+          handleSearch={this.props.handleSearch}
+        />
         <ul className={styles.propertyList}>
           {
             this.props.properties.length ?
