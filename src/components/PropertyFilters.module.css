@@ -3,16 +3,16 @@
 }
 
 .propertyFilters form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  flex: 40%;
   box-sizing: border-box;
+  margin-right: 1rem;
+  flex: 1;
 }
 
 .inputGroup label {
@@ -29,31 +29,33 @@
   background-color: hsl(0,0%,100%);
   border: 1px solid hsl(0,0%,80%);
   border-radius: .25rem;
+  box-sizing: border-box;
 }
 
-.ctaGroup {
+.toggleView {
   align-self: flex-end;
 }
 
-.ctaGroup input {
-  padding: 0 1rem;
-  border-radius: .25rem;
-  border: transparent;
-  box-shadow: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: .75rem;
-  font-weight: 700;
-  background-color: hsl(0,0%,70%);
-  color: white;
-  cursor: pointer;
-  transition: all .3s ease-in-out;
+.toggleView ul {
+  display: flex;
+  align-items: center;
   height: 38px;
-  width: 100%;
 }
 
-.ctaGroup input:hover {
-  opacity: .8;
+.toggleView ul li:last-child {
+  margin-left: 1rem;
+}
+
+.toggleView ul li button {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  color: hsl(0,0%, 40%);
+}
+
+.toggleView ul li button.active {
+  color: #2684FF;
 }
 
 .propertyFilters hr {

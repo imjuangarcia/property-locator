@@ -63,6 +63,26 @@ class PropertyFilters extends React.Component {
               onChange={this.props.handleSearch}
             />
           </div>
+          <div className={styles.toggleView}>
+            <ul>
+              <li>
+                <button
+                  className={this.props.defaultView === 'grid' ? styles.active : ''}
+                  onClick={this.props.toggleDefaultView}
+                >
+                  <i className="fas fa-th fa-lg"></i>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={this.props.defaultView === 'map' ? styles.active : ''}
+                  onClick={this.props.toggleDefaultView}
+                >
+                  <i className="fas fa-map fa-lg"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
         </form>
         <hr />
       </div>

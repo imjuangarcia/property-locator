@@ -3,7 +3,6 @@ import React from 'react';
 import Loading from './components/Loading';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
-import Map from './components/Map';
 import PropertyList from './components/PropertyList';
 
 class App extends React.Component {
@@ -25,6 +24,7 @@ class App extends React.Component {
       pageNumber: 1,
       properties: [],
       filteredProperties: [],
+      defaultView: 'grid',
       loading: false,
     };
   }
@@ -180,6 +180,21 @@ class App extends React.Component {
     this.getProperties(this.state.searchCriteria.property, this.state.searchCriteria.operationType, this.state.searchCriteria.ordering, this.state.searchCriteria.places, this.state.pageNumber + 1, 2);
   }
 
+  // To toggle the default view
+  toggleDefaultView = (e) => {
+    e.preventDefault();
+
+    if (this.state.defaultView === 'grid') {
+      this.setState({
+        defaultView: 'map'
+      });
+    } else {
+      this.setState({
+        defaultView: 'grid'
+      });
+    }
+  }
+
   // To filter the properties
   filterProperties = (ambients, coveredSurface, totalSurface, searchTerm) => {
 
@@ -256,13 +271,9 @@ class App extends React.Component {
           handleFiltersForm={this.handleFiltersForm}
           handleSearch={this.handleSearch}
           filters={this.state.filters}
-          />
-        {this.state.properties.length > 0 ?
-            <Map
-              properties={this.state.filteredProperties}
-            />
-          : ''
-        }
+          defaultView={this.state.defaultView}
+          toggleDefaultView={this.toggleDefaultView}
+        />
       </main>
     );
   }
