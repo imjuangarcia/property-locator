@@ -1,7 +1,6 @@
 import React from 'react';
 
 import PropertyItem from './PropertyItem';
-import PropertyFilters from './PropertyFilters';
 import EmptyState from './EmptyState';
 import Map from './Map';
 
@@ -11,14 +10,13 @@ class PropertyList extends React.Component {
   render() {
     return (
       <section className={styles.properties}>
-        <PropertyFilters
+        {/* <PropertyFilters
           filters={this.props.filters}
           handleFiltersForm={this.props.handleFiltersForm}
           handleSearch={this.props.handleSearch}
           defaultView={this.props.defaultView}
           toggleDefaultView={this.props.toggleDefaultView}
-        />
-        {this.props.defaultView === 'grid' ?
+        /> */}
           <ul className={styles.propertyList}>
             {
               this.props.properties.length ?
@@ -31,11 +29,11 @@ class PropertyList extends React.Component {
                 ) :
                 <EmptyState />
             }
-          </ul> :
-          <Map
+          </ul>
+          {/* <Map
             properties={this.props.properties}
           />
-        }
+        } */}
       </section>
     );
   }
