@@ -14,8 +14,8 @@ for (let n of properati) {
   data.push(n);
 }
 
-// for (let n of argenprop) {
-//   data.push(n);
-// }
+for (let n of argenprop) {
+  data.push(n);
+}
 
 export const propertyData = data;
