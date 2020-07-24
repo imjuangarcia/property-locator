@@ -26,7 +26,7 @@ class App extends React.Component {
       searchTerm: '',
       // pageNumber: 1,
       properties: propertyData,
-      filteredProperties: propertyData,
+      filteredProperties: [],
       defaultView: 'grid',
       loading: false,
     };
