@@ -84,7 +84,6 @@ class PropertyFilters extends React.Component {
             </ul>
           </div>
         </form>
-        <hr />
       </div>
     );
   }
