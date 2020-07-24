@@ -7,9 +7,7 @@ import PropertyList from './components/PropertyList';
 import PropertyFilters from './components/PropertyFilters';
 
 // Data
-import argenprop from './data/argenprop';
-import properati from './data/properati';
-import meli from './data/meli';
+import { propertyData } from './data/';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,50 +26,15 @@ class App extends React.Component {
       },
       searchTerm: '',
       pageNumber: 1,
-      properties: [],
-      filteredProperties: [],
+      properties: propertyData,
+      filteredProperties: propertyData,
       defaultView: 'grid',
       loading: false,
     };
   }
-
-  // Load the data on component mount
-  componentDidMount() {
-    this.loadData();
-  }
   
   componentDidUpdate() {
     console.log(this.state.properties);
-  }
-
-  // To load the data from the json files
-  loadData = () => {
-    // Set the loading state
-    this.setState({
-      loading: true,
-    });
-
-    const data = [];
-
-    // Load the info
-    for (let n of argenprop) {
-      data.push(n);
-    }
-
-    for (let n of meli) {
-      data.push(n);
-    }
-
-    for (let n of properati) {
-      data.push(n);
-    }
-
-    // Set the data to state
-    this.setState({
-      properties: data,
-      filteredProperties: data,
-      loading: false,
-    })
   }
 
   // Function to fetch the properties and update state
