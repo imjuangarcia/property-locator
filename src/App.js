@@ -20,9 +20,8 @@ class App extends React.Component {
       //   places: [],
       // },
       filters: {
-        ambients: 'all',
-        coveredSurface: 'all',
-        totalSurface: 'all',
+        ambients: 0,
+        surface: 'all',
       },
       searchTerm: '',
       // pageNumber: 1,
@@ -34,7 +33,7 @@ class App extends React.Component {
   }
   
   componentDidUpdate() {
-    console.log(this.state.properties);
+    console.log(this.state.filteredProperties);
   }
 
   // Function to fetch the properties and update state
@@ -137,20 +136,20 @@ class App extends React.Component {
 
     // Get the input values
     const ambients = inputs[0].value;
-    const coveredSurface = inputs[1].value;
-    const totalSurface = inputs[2].value;
+    const surface = inputs[1].value;
+    // const totalSurface = inputs[2].value;
 
     // Set them to state
     this.setState({
       filters: {
         ambients,
-        coveredSurface,
-        totalSurface,
+        surface,
+        // totalSurface,
       }
     });
 
     // And filter the properties using this criteria
-    this.filterProperties(ambients, coveredSurface, totalSurface, this.state.searchTerm);
+    this.filterProperties(ambients, surface, this.state.searchTerm);
   }
 
   // To handle the search functionality
@@ -166,7 +165,7 @@ class App extends React.Component {
     });
 
     // Call the filter properties method
-    this.filterProperties(this.state.filters.ambients, this.state.filters.coveredSurface, this.state.filters.totalSurface, searchTerm);
+    this.filterProperties(this.state.filters.ambients, this.state.filters.surface, searchTerm);
   }
 
   // To load more results after a search has been performed
@@ -200,62 +199,50 @@ class App extends React.Component {
   // }
 
   // To filter the properties
-  filterProperties = (ambients, coveredSurface, totalSurface, searchTerm) => {
+  filterProperties = (ambients, surface, searchTerm) => {
 
     // Filter by ambients
     let filteredByAmbient;
-    ambients === 'all' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
+    ambients === 0 ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
+
+    console.log(filteredByAmbient)
     
-    // Filter by covered surface
-    // let filteredByCoveredSurface;
-    // switch(coveredSurface) {
-    //   case '0-49':
-    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 0 && property.surface_covered < 49);
-    //     break;
-    //   case '50-99':
-    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 50 && property.surface_covered < 99);
-    //     break;
-    //   case '100-149':
-    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 100 && property.surface_covered < 149);
-    //     break;
-    //   case '150-199':
-    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 150 && property.surface_covered < 199);
-    //     break;
-    //   case '200-+':
-    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 200);
-    //     break;
-    //   default:
-    //     filteredByCoveredSurface = filteredByAmbient;
-    // }
-    
-    // Filter by total surface
-    // let filteredByTotalSurface;
-    // switch(totalSurface) {
-    //   case '0-49':
-    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 0 && property.surface_total < 49);
-    //     break;
-    //   case '50-99':
-    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 50 && property.surface_total < 99);
-    //     break;
-    //   case '100-149':
-    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 100 && property.surface_total < 149);
-    //     break;
-    //   case '150-199':
-    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 150 && property.surface_total < 199);
-    //     break;
-    //   case '200-+':
-    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 200);
-    //     break;
-    //   default:
-    //     filteredByTotalSurface = filteredByCoveredSurface;
-    // }
+    // Filter by surface
+    let filteredBySurface;
+    switch(surface) {
+      case '0-49':
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 0 && property.area < 49);
+        break;
+      case '50-99':
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 50 && property.area < 99);
+        break;
+      case '100-149':
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 100 && property.area < 149);
+        break;
+      case '150-199':
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 150 && property.area < 199);
+        break;
+      case '200-+':
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 200);
+        break;
+      default:
+        filteredBySurface = filteredByAmbient;
+    }
 
     // Filter by word
-    // const filteredBySearchTerm = filteredByTotalSurface.filter(property => property.description.toLowerCase().includes(searchTerm) || property.title.toLowerCase().includes(searchTerm));
+    const filteredBySearchTerm = filteredBySurface.filter(property => {
+      if(property.description) {
+        return property.description.toLowerCase().includes(searchTerm);
+      } else if(property.title) {
+        return property.title.toLowerCase().includes(searchTerm);
+      } else if(property.location) {
+        return property.location.toLowerCase().includes(searchTerm);
+      }
+    });
 
     // After all the filtering, push the data to state
     this.setState({
-      filteredProperties: filteredByAmbient,
+      filteredProperties: filteredBySearchTerm,
     });
   }
 
