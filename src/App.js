@@ -210,19 +210,19 @@ class App extends React.Component {
     let filteredBySurface;
     switch(surface) {
       case '0-49':
-        filteredBySurface = filteredByAmbient.filter(property => property.area > 0 && property.area < 49);
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 0 && property.area < 49).sort((a, b) => a.area > b.area ? 1 : -1);
         break;
       case '50-99':
-        filteredBySurface = filteredByAmbient.filter(property => property.area > 50 && property.area < 99);
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 50 && property.area < 99).sort((a, b) => a.area > b.area ? 1 : -1);
         break;
       case '100-149':
-        filteredBySurface = filteredByAmbient.filter(property => property.area > 100 && property.area < 149);
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 100 && property.area < 149).sort((a, b) => a.area > b.area ? 1 : -1);
         break;
       case '150-199':
-        filteredBySurface = filteredByAmbient.filter(property => property.area > 150 && property.area < 199);
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 150 && property.area < 199).sort((a, b) => a.area > b.area ? 1 : -1);
         break;
       case '200-+':
-        filteredBySurface = filteredByAmbient.filter(property => property.area > 200);
+        filteredBySurface = filteredByAmbient.filter(property => property.area > 200).sort((a, b) => a.area > b.area ? 1 : -1);
         break;
       default:
         filteredBySurface = filteredByAmbient;
@@ -232,19 +232,19 @@ class App extends React.Component {
     let filteredByPrice;
     switch(priceRange) {
       case '0-30':
-        filteredByPrice = filteredBySurface.filter(property => property.price > 0 && property.price < 29999);
+        filteredByPrice = filteredBySurface.filter(property => property.price > 0 && property.price < 29999).sort((a, b) => a.price > b.price ? 1 : -1);
         break;
       case '30-60':
-        filteredByPrice = filteredBySurface.filter(property => property.price > 30000 && property.price < 59999);
+        filteredByPrice = filteredBySurface.filter(property => property.price > 30000 && property.price < 59999).sort((a, b) => a.price > b.price ? 1 : -1);
         break;
       case '60-90':
-        filteredByPrice = filteredBySurface.filter(property => property.price > 60000 && property.price < 89999);
+        filteredByPrice = filteredBySurface.filter(property => property.price > 60000 && property.price < 89999).sort((a, b) => a.price > b.price ? 1 : -1);
         break;
       case '90-120':
-        filteredByPrice = filteredBySurface.filter(property => property.price > 90000 && property.price < 119999);
+        filteredByPrice = filteredBySurface.filter(property => property.price > 90000 && property.price < 119999).sort((a, b) => a.price > b.price ? 1 : -1);
         break;
       case '120-+':
-        filteredByPrice = filteredBySurface.filter(property => property.price > 120000);
+        filteredByPrice = filteredBySurface.filter(property => property.price > 120000).sort((a, b) => a.price > b.price ? 1 : -1);
         break;
       default:
         filteredByPrice = filteredBySurface;
