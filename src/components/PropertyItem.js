@@ -32,7 +32,7 @@ class PropertyItem extends React.Component {
           </div>
         </a>
         <a
-          href={`https://www.google.com/maps/search/${this.props.property.location}`}
+          href={this.props.location ? `https://www.google.com/maps/search/${this.props.property.location}` : `https://www.google.com/maps/search/${this.props.property.address}`}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.mapButton}
