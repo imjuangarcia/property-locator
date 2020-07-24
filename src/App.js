@@ -13,19 +13,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchCriteria: {
-        property: 'casa',
-        operationType: 'alquiler',
-        ordering: 'ord:p-a',
-        places: [],
-      },
+      // searchCriteria: {
+      //   property: 'casa',
+      //   operationType: 'alquiler',
+      //   ordering: 'ord:p-a',
+      //   places: [],
+      // },
       filters: {
         ambients: 'all',
         coveredSurface: 'all',
         totalSurface: 'all',
       },
       searchTerm: '',
-      pageNumber: 1,
+      // pageNumber: 1,
       properties: propertyData,
       filteredProperties: propertyData,
       defaultView: 'grid',
@@ -204,58 +204,58 @@ class App extends React.Component {
 
     // Filter by ambients
     let filteredByAmbient;
-    ambients === 'all' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.rooms === parseInt(ambients) || property.bedrooms === parseInt(ambients));
+    ambients === 'all' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
     
     // Filter by covered surface
-    let filteredByCoveredSurface;
-    switch(coveredSurface) {
-      case '0-49':
-        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 0 && property.surface_covered < 49);
-        break;
-      case '50-99':
-        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 50 && property.surface_covered < 99);
-        break;
-      case '100-149':
-        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 100 && property.surface_covered < 149);
-        break;
-      case '150-199':
-        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 150 && property.surface_covered < 199);
-        break;
-      case '200-+':
-        filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 200);
-        break;
-      default:
-        filteredByCoveredSurface = filteredByAmbient;
-    }
+    // let filteredByCoveredSurface;
+    // switch(coveredSurface) {
+    //   case '0-49':
+    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 0 && property.surface_covered < 49);
+    //     break;
+    //   case '50-99':
+    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 50 && property.surface_covered < 99);
+    //     break;
+    //   case '100-149':
+    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 100 && property.surface_covered < 149);
+    //     break;
+    //   case '150-199':
+    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 150 && property.surface_covered < 199);
+    //     break;
+    //   case '200-+':
+    //     filteredByCoveredSurface = filteredByAmbient.filter(property => property.surface_covered > 200);
+    //     break;
+    //   default:
+    //     filteredByCoveredSurface = filteredByAmbient;
+    // }
     
     // Filter by total surface
-    let filteredByTotalSurface;
-    switch(totalSurface) {
-      case '0-49':
-        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 0 && property.surface_total < 49);
-        break;
-      case '50-99':
-        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 50 && property.surface_total < 99);
-        break;
-      case '100-149':
-        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 100 && property.surface_total < 149);
-        break;
-      case '150-199':
-        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 150 && property.surface_total < 199);
-        break;
-      case '200-+':
-        filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 200);
-        break;
-      default:
-        filteredByTotalSurface = filteredByCoveredSurface;
-    }
+    // let filteredByTotalSurface;
+    // switch(totalSurface) {
+    //   case '0-49':
+    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 0 && property.surface_total < 49);
+    //     break;
+    //   case '50-99':
+    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 50 && property.surface_total < 99);
+    //     break;
+    //   case '100-149':
+    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 100 && property.surface_total < 149);
+    //     break;
+    //   case '150-199':
+    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 150 && property.surface_total < 199);
+    //     break;
+    //   case '200-+':
+    //     filteredByTotalSurface = filteredByAmbient.filter(property => property.surface_total > 200);
+    //     break;
+    //   default:
+    //     filteredByTotalSurface = filteredByCoveredSurface;
+    // }
 
     // Filter by word
-    const filteredBySearchTerm = filteredByTotalSurface.filter(property => property.description.toLowerCase().includes(searchTerm) || property.title.toLowerCase().includes(searchTerm));
+    // const filteredBySearchTerm = filteredByTotalSurface.filter(property => property.description.toLowerCase().includes(searchTerm) || property.title.toLowerCase().includes(searchTerm));
 
     // After all the filtering, push the data to state
     this.setState({
-      filteredProperties: filteredBySearchTerm,
+      filteredProperties: filteredByAmbient,
     });
   }
 
