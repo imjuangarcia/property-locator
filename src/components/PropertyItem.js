@@ -31,14 +31,14 @@ class PropertyItem extends React.Component {
             </ul>
           </div>
         </a>
-        {/* <a
-          href={`https://www.google.com/maps?q=loc:${this.props.property.lat},${this.props.property.lon}`}
+        <a
+          href={`https://www.google.com/maps/search/${this.props.property.location}`}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.mapButton}
         >
           Ver ubicaci&oacute;n en el mapa
-        </a> */}
+        </a>
       </li>
     );
   }
