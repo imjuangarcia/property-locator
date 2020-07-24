@@ -203,7 +203,7 @@ class App extends React.Component {
 
     // Filter by ambients
     let filteredByAmbient;
-    ambients === 0 ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
+    ambients === '0' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
 
     console.log(filteredByAmbient)
     
