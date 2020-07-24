@@ -26,11 +26,27 @@ class PropertyFilters extends React.Component {
               onChange={this.props.handleFiltersForm}
             >
               <option value="all">Todos</option>
-              <option value="0-49">Hasta 49</option>
+              <option value="0-49">Hasta 49 (Caja de Zapatos)</option>
               <option value="50-99">50 - 99</option>
               <option value="100-149">100 - 149</option>
               <option value="150-199">150 - 199</option>
               <option value="200-+">M&aacute;s de 200</option>
+            </select>
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="priceRange">Rango de Precio:</label>
+            <select
+              name="priceRange"
+              required
+              defaultValue={this.props.filters.priceRange}
+              onChange={this.props.handleFiltersForm}
+            >
+              <option value="all">Todos</option>
+              <option value="0-30">$0 - $30.000 (Rata Style)</option>
+              <option value="30-60">$30.000 - $60.000</option>
+              <option value="60-90">$60.000 - $90.000</option>
+              <option value="90-120">$90.000 - $120.000</option>
+              <option value="120-+">M&aacute;s de $120.000 (Millonario)</option>
             </select>
           </div>
           <div className={styles.inputGroup}>
@@ -41,7 +57,7 @@ class PropertyFilters extends React.Component {
               onChange={this.props.handleSearch}
             />
           </div>
-          <div className={styles.toggleView}>
+          {/* <div className={styles.toggleView}>
             <ul>
               <li>
                 <button
@@ -60,7 +76,7 @@ class PropertyFilters extends React.Component {
                 </button>
               </li>
             </ul>
-          </div>
+          </div> */}
         </form>
       </div>
     );

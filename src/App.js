@@ -22,6 +22,7 @@ class App extends React.Component {
       filters: {
         ambients: 0,
         surface: 'all',
+        priceRange: 'all',
       },
       searchTerm: '',
       // pageNumber: 1,
@@ -137,19 +138,19 @@ class App extends React.Component {
     // Get the input values
     const ambients = inputs[0].value;
     const surface = inputs[1].value;
-    // const totalSurface = inputs[2].value;
+    const priceRange = inputs[2].value;
 
     // Set them to state
     this.setState({
       filters: {
         ambients,
         surface,
-        // totalSurface,
+        priceRange,
       }
     });
 
     // And filter the properties using this criteria
-    this.filterProperties(ambients, surface, this.state.searchTerm);
+    this.filterProperties(ambients, surface, priceRange, this.state.searchTerm);
   }
 
   // To handle the search functionality
@@ -165,7 +166,7 @@ class App extends React.Component {
     });
 
     // Call the filter properties method
-    this.filterProperties(this.state.filters.ambients, this.state.filters.surface, searchTerm);
+    this.filterProperties(this.state.filters.ambients, this.state.filters.surface, this.state.filters.priceRange, searchTerm);
   }
 
   // To load more results after a search has been performed
@@ -199,13 +200,11 @@ class App extends React.Component {
   // }
 
   // To filter the properties
-  filterProperties = (ambients, surface, searchTerm) => {
+  filterProperties = (ambients, surface, priceRange, searchTerm) => {
 
     // Filter by ambients
     let filteredByAmbient;
     ambients === '0' ? filteredByAmbient = this.state.properties : filteredByAmbient = this.state.properties.filter(property => property.ambients === parseInt(ambients));
-
-    console.log(filteredByAmbient)
     
     // Filter by surface
     let filteredBySurface;
@@ -229,8 +228,30 @@ class App extends React.Component {
         filteredBySurface = filteredByAmbient;
     }
 
+    // Filter by price
+    let filteredByPrice;
+    switch(priceRange) {
+      case '0-30':
+        filteredByPrice = filteredBySurface.filter(property => property.price > 0 && property.price < 29999);
+        break;
+      case '30-60':
+        filteredByPrice = filteredBySurface.filter(property => property.price > 30000 && property.price < 59999);
+        break;
+      case '60-90':
+        filteredByPrice = filteredBySurface.filter(property => property.price > 60000 && property.price < 89999);
+        break;
+      case '90-120':
+        filteredByPrice = filteredBySurface.filter(property => property.price > 90000 && property.price < 119999);
+        break;
+      case '120-+':
+        filteredByPrice = filteredBySurface.filter(property => property.price > 120000);
+        break;
+      default:
+        filteredByPrice = filteredBySurface;
+    }
+
     // Filter by word
-    const filteredBySearchTerm = filteredBySurface.filter(property => {
+    const filteredBySearchTerm = filteredByPrice.filter(property => {
       if(property.description) {
         return property.description.toLowerCase().includes(searchTerm);
       } else if(property.title) {
