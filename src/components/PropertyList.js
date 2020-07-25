@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropertyItem from './PropertyItem';
 import EmptyState from './EmptyState';
-import Map from './Map';
+// import Map from './Map';
 
 import styles from './PropertyList.module.css';
 
