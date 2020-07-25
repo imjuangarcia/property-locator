@@ -256,7 +256,7 @@ class App extends React.Component {
         return property.description.toLowerCase().includes(searchTerm);
       } else if(property.title) {
         return property.title.toLowerCase().includes(searchTerm);
-      } else if(property.location) {
+      } else {
         return property.location.toLowerCase().includes(searchTerm);
       }
     });
