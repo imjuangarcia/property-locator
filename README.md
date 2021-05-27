@@ -9,3 +9,9 @@ Heads up that I don't use this tool anymore, since I've moved a while back. This
 1. `git clone https://github.com/imjuangarcia/property-locator/`
 2. `npm install`
 3. `npm run start`
+
+### Sreenshots
+
+![Screenshot 2021-05-27 at 11-37-14 Property Locator](https://user-images.githubusercontent.com/34423371/119845852-00c82300-bee0-11eb-8973-2a970929c994.png)
+
+![Screenshot 2021-05-27 at 11-37-41 Property Locator](https://user-images.githubusercontent.com/34423371/119845864-032a7d00-bee0-11eb-8827-949704ec9234.png)
